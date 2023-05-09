@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:signup/IntroScreen.dart';
-import 'package:signup/Search.dart';
+import './IntroScreen.dart';
+import './Search.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
