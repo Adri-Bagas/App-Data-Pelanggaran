@@ -3,6 +3,7 @@ import 'package:app_data_pelanggaran/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import './SignUp.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
