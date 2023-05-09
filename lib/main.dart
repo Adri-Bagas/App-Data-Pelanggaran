@@ -1,10 +1,15 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+
+import 'package:app_data_pelanggaran/ForgetPassword.dart';
+import 'package:app_data_pelanggaran/Form.dart';
 import 'package:app_data_pelanggaran/login_page.dart';
+import 'package:flutter/material.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import './SignUp.dart';
 import './introscreen.dart';
 import './models/Siswa.dart';
 import './models/Kelas.dart';
+
 void main() {
   runApp(const MyApp());
 }

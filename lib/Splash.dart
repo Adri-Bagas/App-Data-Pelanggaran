@@ -1,5 +1,8 @@
+import 'package:app_data_pelanggaran/IntroScreen.dart';
 import 'package:flutter/material.dart';
+
 import './IntroScreen.dart';
+
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -20,10 +23,7 @@ class _SplashState extends State<Splash> {
     await Future.delayed(Duration(milliseconds: 1500), () {});
     // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => IntroScreen(
-                )));
+        context, MaterialPageRoute(builder: (context) => IntroScreen()));
   }
 
   @override
