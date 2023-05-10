@@ -1,6 +1,7 @@
 import 'package:app_data_pelanggaran/ForgetPassword.dart';
-import 'package:app_data_pelanggaran/Form.dart';
+import 'package:app_data_pelanggaran/Form_page.dart';
 import 'package:app_data_pelanggaran/IntroScreen.dart';
+import 'package:app_data_pelanggaran/Setting.dart';
 import 'package:app_data_pelanggaran/SignUp.dart';
 import 'package:app_data_pelanggaran/login_page.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +19,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
-          splash: Icons.star,
+          splash: Image.asset('assets/images/Logoprojek.png'),
+          splashIconSize: 400,
           duration: 3000,
           splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Color.fromARGB(255, 255, 255, 255),
-          nextScreen: Forminput()),
+          nextScreen: SettingPage()),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:app_data_pelanggaran/Search.dart';
+import 'package:app_data_pelanggaran/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -19,6 +20,25 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return Scaffold(
         body: Column(
       children: [
+        Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return LoginPage();
+                }));
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 20, top: 20),
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 25,
+                ),
+              ),
+            ),
+          ],
+        ),
         Container(
           margin: EdgeInsets.only(top: 100),
           child: Column(
@@ -57,7 +77,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 border: OutlineInputBorder(), label: Text('Email')),
           ),
         ),
-        
         Container(
           margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: ElevatedButton(
