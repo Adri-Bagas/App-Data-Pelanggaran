@@ -1,7 +1,7 @@
-
 import 'package:app_data_pelanggaran/ForgetPassword.dart';
 import 'package:app_data_pelanggaran/Form_page.dart';
-import 'package:app_data_pelanggaran/IntroScreen.dart';
+import 'package:app_data_pelanggaran/Search.dart';
+import 'package:app_data_pelanggaran/Setting.dart';
 import 'package:app_data_pelanggaran/SignUp.dart';
 import 'package:app_data_pelanggaran/login_page.dart';
 import 'package:flutter/material.dart';
@@ -32,4 +32,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

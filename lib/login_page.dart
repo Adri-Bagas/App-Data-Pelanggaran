@@ -81,14 +81,13 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 margin: EdgeInsets.all(15),
                 child: Form(
-                  key: _formState,
+                  key: _formKey,
                   child: Column(
                     children: [
                       Container(
                         width: 400,
                         margin: EdgeInsets.only(left: 10),
                         child: TextFormField(
-                          controller: EmailController,
                           validator: (value) {
                             if (value == '') {
                               return "Text tidak boleh kosong!";
@@ -107,7 +106,6 @@ class _LoginPageState extends State<LoginPage> {
                         margin: EdgeInsets.only(left: 10),
                         child: TextFormField(
                           obscureText: true,
-                          controller: passwordController,
                           validator: (value) {
                             if (value == '') {
                               return "Text tidak boleh kosong!";
@@ -150,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                             fixedSize: Size(400, 57),
                           ),
                           onPressed: () {
-                            if (_formState.currentState!.validate()) {
+                            if (_formKey.currentState!.validate()) {
                               // Do something
                             } else {}
                             Navigator.push(context,
