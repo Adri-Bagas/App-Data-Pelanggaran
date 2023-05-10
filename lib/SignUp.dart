@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 import './IntroScreen.dart';
-import './Search';
+import './Search.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -60,7 +60,8 @@ class _SignUpState extends State<SignUp> {
                         }
                       },
                       decoration: InputDecoration(
-                          border: OutlineInputBorder(), label: Text('Name')),
+                          border: OutlineInputBorder(), label: Text('Name'),
+                      ),
                     ),
                   ),
                   SizedBox(

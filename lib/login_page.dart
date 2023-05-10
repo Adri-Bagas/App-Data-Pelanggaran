@@ -1,13 +1,8 @@
 
 import 'package:app_data_pelanggaran/ForgetPassword.dart';
-import 'package:app_data_pelanggaran/Search.dart';
 import 'package:app_data_pelanggaran/SignUp.dart';
-import 'package:app_data_pelanggaran/IntroScreen.dart';
-
+import 'package:app_data_pelanggaran/models/User.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -28,18 +23,26 @@ class _LoginPageState extends State<LoginPage> {
 
   String _password = '';
 
+  @override
+  void initState() {
+    super.initState();
+
+
+    _checkLoginStatus();
+  }
+
+  void _checkLoginStatus() async{
+    final prefs = await SharedPreferences.getInstance();
+
+    if(prefs.getString('jwt') != null){
+      Navigator.pushReplacementNamed(context, '/Home');
+    }
+  }
+
   void _submitForm() async {
     if(_formKey.currentState!.validate()){
-      final response = await http.post(
-        Uri.parse(LoginURL),
-        body: {'email': _email, 'password': _password},
-      );
-      if (response.statusCode == 200) {
-        final token = jsonDecode(response.body)['token'];
-        print(token);
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('jwt', token);
-        Navigator.pushReplacementNamed(context, '/introScreen');
+      if (await checkAccountOnLogin(_email, _password)) {
+        Navigator.pushReplacementNamed(context, '/Home');
       }else{
         showDialog(
           context: context,
@@ -81,14 +84,14 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 margin: EdgeInsets.all(15),
                 child: Form(
-                  key: _formState,
+                  key: _formKey,
                   child: Column(
                     children: [
                       Container(
                         width: 400,
                         margin: EdgeInsets.only(left: 10),
                         child: TextFormField(
-                          controller: EmailController,
+                          onChanged: (value) => _email = value,
                           validator: (value) {
                             if (value == '') {
                               return "Text tidak boleh kosong!";
@@ -96,7 +99,8 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              label: Text('Email')),
+                              label: Text('Email'),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -107,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                         margin: EdgeInsets.only(left: 10),
                         child: TextFormField(
                           obscureText: true,
-                          controller: passwordController,
+                          onChanged: (value) => _password = value,
                           validator: (value) {
                             if (value == '') {
                               return "Text tidak boleh kosong!";
@@ -115,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
-                              label: Text('Password')),
+                              label: Text('Password'),),
                         ),
                       ),
                       Padding(
@@ -149,17 +153,9 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             fixedSize: Size(400, 57),
                           ),
-                          onPressed: () {
-                            if (_formState.currentState!.validate()) {
-                              // Do something
-                            } else {}
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return SearchPage();
-                            }));
-                          },
+                          onPressed: _submitForm,
                           child: Text(
-                            'Sign in',
+                            'Login',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
@@ -177,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Have an account?',
+                      'Doesnt Have an account?',
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     const SizedBox(
@@ -191,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                         }));
                       },
                       child: const Text(
-                        'Login',
+                        'SignUp',
                         style: TextStyle(
                           color: Colors.blue,
                         ),

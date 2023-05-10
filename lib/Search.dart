@@ -18,7 +18,6 @@ class SearchPage extends StatelessWidget {
               icon: Icon(Icons.search))
         ],
       ),
-      drawer: Drawer(),
     );
   }
 }

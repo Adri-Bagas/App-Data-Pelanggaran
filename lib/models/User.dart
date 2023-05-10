@@ -21,7 +21,6 @@ Future<bool> checkAccountOnLogin(String email, String password) async {
   );
   if (response.statusCode == 200) {
     final token = jsonDecode(response.body)['token'];
-    print(token);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('jwt', token);
     return true;
@@ -29,6 +28,8 @@ Future<bool> checkAccountOnLogin(String email, String password) async {
     return false;
   }
 }
+
+
 
 
 
