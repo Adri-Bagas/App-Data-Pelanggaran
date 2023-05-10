@@ -1,21 +1,56 @@
+
 import 'package:app_data_pelanggaran/ForgetPassword.dart';
 import 'package:app_data_pelanggaran/Search.dart';
 import 'package:app_data_pelanggaran/SignUp.dart';
-import 'package:flutter/material.dart';
-import 'components/my__button.dart';
-import 'components/my_textfield.dart';
-import 'components/square_tile.dart';
+import 'package:app_data_pelanggaran/IntroScreen.dart';
 
-class LoginPage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
-  //text editing controller
-  final EmailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final _formState = GlobalKey<FormState>();
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
 
-  //sign user in method
-  void signUserIn() {}
+class _LoginPageState extends State<LoginPage> {
+
+@override
+  final _formKey = GlobalKey<FormState>();
+
+  String LoginURL = 'http://localhost:3000/users/login';
+
+  String _email = '';
+
+  String _password = '';
+
+  void _submitForm() async {
+    if(_formKey.currentState!.validate()){
+      final response = await http.post(
+        Uri.parse(LoginURL),
+        body: {'email': _email, 'password': _password},
+      );
+      if (response.statusCode == 200) {
+        final token = jsonDecode(response.body)['token'];
+        print(token);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('jwt', token);
+        Navigator.pushReplacementNamed(context, '/introScreen');
+      }else{
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Error'),
+            content: Text('Invalid email or password'),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

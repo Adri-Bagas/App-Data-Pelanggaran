@@ -1,6 +1,9 @@
 import 'package:app_data_pelanggaran/IntroScreen.dart';
 import 'package:flutter/material.dart';
 
+import './IntroScreen.dart';
+
+
 class Splash extends StatefulWidget {
   const Splash({super.key});
 

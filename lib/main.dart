@@ -1,11 +1,16 @@
+
 import 'package:app_data_pelanggaran/ForgetPassword.dart';
 import 'package:app_data_pelanggaran/Form_page.dart';
 import 'package:app_data_pelanggaran/IntroScreen.dart';
-import 'package:app_data_pelanggaran/Setting.dart';
 import 'package:app_data_pelanggaran/SignUp.dart';
 import 'package:app_data_pelanggaran/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:flutter/material.dart';
+import './SignUp.dart';
+import './introscreen.dart';
+import './models/Siswa.dart';
+import './models/Kelas.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,12 +24,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
-          splash: Image.asset('assets/images/Logoprojek.png'),
-          splashIconSize: 400,
+          splash: Icons.star,
           duration: 3000,
           splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Color.fromARGB(255, 255, 255, 255),
-          nextScreen: SettingPage()),
+          nextScreen: FormPage()),
     );
   }
 }
+
