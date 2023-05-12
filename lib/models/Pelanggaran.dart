@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'Url.dart';
+
 class Pelanggaran {
   late int? id;
   late String? nama_pelanggaran;
@@ -12,7 +14,7 @@ class Pelanggaran {
 Future<List<Pelanggaran>> fetchDataPelanggaranAll() async {
   List<Pelanggaran> Pelanggarans = [];
 
-  String apiURL = "http://localhost:3000/siswas/show/all";
+  String apiURL = "${Urldata.Url}/pelanggaran/all";
   var result = await http.get(Uri.parse(apiURL));
   var dataJson = json.decode(result.body);
 
@@ -24,8 +26,12 @@ Future<List<Pelanggaran>> fetchDataPelanggaranAll() async {
     pelanggran.poin = item['poin'];
     pelanggran.jn_pelanggaran = item['jn_pelanggaran'];
 
+    print(pelanggran.jn_pelanggaran);
+
     Pelanggarans.add(pelanggran);
   }
+
+
 
   return Pelanggarans;
 }

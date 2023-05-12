@@ -1,9 +1,7 @@
-import 'package:app_data_pelanggaran/SignUp.dart';
 import 'package:app_data_pelanggaran/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import './SignUp.dart';
+
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
@@ -55,15 +53,15 @@ class IntroScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
-                child: Container(
-              width: 125,
-              margin: EdgeInsets.fromLTRB(250, 100, 0, 0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0xffFF0404),
-              ),
-            )),
+            // Positioned(
+            //     child: Container(
+            //   width: 125,
+            //   margin: EdgeInsets.fromLTRB(250, 100, 0, 0),
+            //   decoration: BoxDecoration(
+            //     shape: BoxShape.circle,
+            //     color: Color(0xffFF0404),
+            //   ),
+            // )),
             Positioned(
               width: MediaQuery.of(context).size.width,
               bottom: 30,

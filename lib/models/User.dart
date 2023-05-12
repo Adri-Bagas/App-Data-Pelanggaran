@@ -4,16 +4,18 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Url.dart';
+
 class User{
-  late String id;
-  late String name;
-  late String email;
-  late String level;
+  String? id;
+  String? name;
+  String? email;
+  String? level;
 }
 
 Future<bool> checkAccountOnLogin(String email, String password) async {
 
-  String LoginURL = 'http://localhost:3000/users/login';
+  String LoginURL = '${Urldata.Url}/users/login';
 
   final response = await http.post(
     Uri.parse(LoginURL),
@@ -26,6 +28,27 @@ Future<bool> checkAccountOnLogin(String email, String password) async {
     return true;
   }else{
     return false;
+  }
+}
+
+Future<User> fetchUserData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  final jwt = prefs.getString('jwt');
+  final response = await http.get(
+    Uri.parse('${Urldata.Url}/users/user-data'),
+    headers: {'Authorization': 'Bearer $jwt'},
+  );
+  if (response.statusCode == 200) {
+    final userData = jsonDecode(response.body);
+    User datas = User();
+
+    datas.email = userData['email'];
+    datas.name = userData['name'];
+
+    print(datas);
+    return datas;
+  } else {
+    return User();
   }
 }
 

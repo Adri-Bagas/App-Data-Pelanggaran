@@ -41,6 +41,7 @@ dependencies:
   animated_splash_screen: ^1.3.0
   http: ^0.13.6
   shared_preferences: ^2.1.0
+  flutter_image_compress: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -71,9 +72,11 @@ flutter:
       - assets/images/maskotb.png
       - assets/images/Logoprojek.png
       - assets/images/ANjing.png
-
       - assets/images/clock.png
       - assets/images/indian.png
+      - assets/images/Success.png
+      - assets/images/Siswa.png
+      - assets/images/Check.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

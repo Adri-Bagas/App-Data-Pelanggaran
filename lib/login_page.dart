@@ -4,6 +4,7 @@ import 'package:app_data_pelanggaran/SignUp.dart';
 import 'package:app_data_pelanggaran/models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'models/Url.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -17,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
 @override
   final _formKey = GlobalKey<FormState>();
 
-  String LoginURL = 'http://localhost:3000/users/login';
+  String LoginURL = '${Urldata.Url}/users/login';
 
   String _email = '';
 
@@ -58,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Stack(
         children: [
@@ -76,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
           Column(
             children: [
               Container(
-                  margin: EdgeInsets.only(top: 80, bottom: 20),
+                  margin: EdgeInsets.only(top: 20, bottom: 20),
                   width: 250,
                   height: 250,
                   child:

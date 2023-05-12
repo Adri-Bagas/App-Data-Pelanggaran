@@ -1,5 +1,8 @@
 import 'package:app_data_pelanggaran/Search.dart';
+import 'package:app_data_pelanggaran/Setting.dart';
 import 'package:flutter/material.dart';
+
+import 'Form_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List _Pages = [
     HomePage(),
     SearchPage(),
-    Text("Settings"),
+    SettingPage(),
   ];
 
   @override
@@ -133,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 24),
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'User !',
+                      text: 'How are you!',
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                       ),
@@ -174,37 +177,45 @@ class _HomePageState extends State<HomePage> {
                       center: Alignment(-1, -1),
                     ),
                   ),
-                  child: Stack(
-                    children: [
-                      const Positioned(
-                        top: 30,
-                        left: 30,
-                        child: Text(
-                          "Find Your \nDog!",
-                          style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontFamily: "Ubuntu"),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context)=>FormPage(siswa: null))
+                      );
+                    },
+                    child: Stack(
+                      children: [
+                        const Positioned(
+                          top: 30,
+                          left: 30,
+                          child: Text(
+                            "Catat \nPelanggaran!",
+                            style: TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontFamily: "Ubuntu"),
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        top: 20,
-                        left: 150,
-                        child: Image.asset(
-                          "assets/images/ANjing.png",
-                          width: 300,
-                          height: 300,
+                        Positioned(
+                          top: 20,
+                          left: 150,
+                          child: Image.asset(
+                            "assets/images/ANjing.png",
+                            width: 300,
+                            height: 300,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
               Stack(
                 children: [
                   Positioned(
-                    top: 50,
+                    top: 40,
                     left: 30,
                     child: Container(
                       child: const Text(
@@ -212,6 +223,7 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                           fontFamily: "Ubuntu",
                           fontSize: 24,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -228,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                               },
                               child: Container(
                                 margin:
-                                const EdgeInsets.fromLTRB(20, 150, 20, 20),
+                                const EdgeInsets.fromLTRB(20, 10, 20, 20),
                                 height: 200,
                                 width: 250,
                                 decoration: BoxDecoration(
@@ -239,15 +251,25 @@ class _HomePageState extends State<HomePage> {
                                     center: Alignment(-1, -1),
                                   ),
                                 ),
-                                child: Container(
-                                  margin: EdgeInsets.all(20),
-                                  child: Text(
-                                    "Daftar Kelas",
-                                    style: TextStyle(
-                                      fontFamily: "Ubuntu",
-                                      fontSize: 24,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      child: Text(
+                                        "Daftar Kelas",
+                                        style: TextStyle(
+                                          fontFamily: "Ubuntu",
+                                          fontSize: 24,
+                                          color: Colors.white
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    Positioned(
+                                      right: -30,
+                                      bottom: 10,
+                                      child: Image.asset('assets/images/Siswa.png', width: 150),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -260,10 +282,10 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             GestureDetector(
                               onTap: (){
-
+                                showSearch(context: context, delegate: DataSearch());
                               },
                               child: Container(
-                                margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                                margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
                                 height: 200,
                                 width: 250,
                                 decoration: BoxDecoration(
@@ -274,15 +296,63 @@ class _HomePageState extends State<HomePage> {
                                     center: Alignment(-1, -1),
                                   ),
                                 ),
-                                child: Container(
-                                  margin: EdgeInsets.all(20),
-                                  child: Text(
-                                    "Menu 2",
-                                    style: TextStyle(
-                                      fontFamily: "Ubuntu",
-                                      fontSize: 24,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      child: Text(
+                                        "Cari Siswa",
+                                        style: TextStyle(
+                                          fontFamily: "Ubuntu",
+                                          fontSize: 24,
+                                          color: Colors.white
+                                        ),
+                                      ),
                                     ),
+                                    Positioned(
+                                      right: -30,
+                                      bottom: -150,
+                                      child: Image.asset('assets/images/indian.png', width: 150),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/Data/Pelanggaran');
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                                height: 200,
+                                width: 250,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: const RadialGradient(
+                                    colors: [Colors.lightBlueAccent, Colors.indigoAccent],
+                                    radius: 1.2,
+                                    center: Alignment(-1, -1),
                                   ),
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      child: Text(
+                                        "Data Peraturan",
+                                        style: TextStyle(
+                                            fontFamily: "Ubuntu",
+                                            fontSize: 20,
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      right: -30,
+                                      bottom: -70,
+                                      child: Image.asset('assets/images/Check.png', width: 150),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

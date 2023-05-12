@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './Siswa.dart';
+import './Url.dart';
 
 
 class Kelas {
@@ -13,7 +14,7 @@ class Kelas {
 Future<List<Kelas>> fetchDataKelasWithSiswaAll() async{
   List<Kelas> Kelases = [];
 
-  String apiURL = "http://localhost:3000/kelas/";
+  String apiURL = "${Urldata.Url}/kelas/";
 
   var result = await http.get(Uri.parse(apiURL));
   var dataJson = json.decode(result.body);
@@ -50,4 +51,5 @@ Future<List<Kelas>> fetchDataKelasWithSiswaAll() async{
 
   return Kelases;
 }
+
 

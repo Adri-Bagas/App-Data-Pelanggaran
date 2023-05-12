@@ -2,7 +2,6 @@ import 'package:app_data_pelanggaran/Search.dart';
 import 'package:app_data_pelanggaran/login_page.dart';
 import 'package:flutter/material.dart';
 
-import './IntroScreen.dart';
 
 
 class SignUp extends StatefulWidget {

@@ -24,9 +24,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return LoginPage();
-                }));
+                Navigator.pop(context);
               },
               child: Container(
                 margin: EdgeInsets.only(left: 20, top: 20),
@@ -40,7 +38,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           ],
         ),
         Container(
-          margin: EdgeInsets.only(top: 100),
+          margin: EdgeInsets.only(top: 100, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -88,9 +86,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             ),
             onPressed: () {
               print('Check your Email');
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return SearchPage();
-              }));
             },
             child: Text(
               'Send Intructions',

@@ -2,18 +2,39 @@ import 'package:app_data_pelanggaran/models/Pelanggaran.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import './Record_Pelanggaran.dart';
+import 'Url.dart';
 
 class Siswa {
   late int id;
   late String nama;
   late List<Record_Pelanggaran>? pelanggarans;
   late int? poin_tot;
+  late String? nama_kelas;
 }
 
-  Future<List<Siswa>> fetchDataSiswaAll() async {
+Future<List<Siswa>> fetchDataSiswaAll() async {
   List<Siswa> Siswas = [];
 
-  String apiURL = "http://localhost:3000/siswas/show/all";
+  String apiURL = "${Urldata.Url}/siswas/show/all";
+  var result = await http.get(Uri.parse(apiURL));
+  var dataJson = json.decode(result.body);
+
+  for (var item in dataJson){
+    Siswa siswa = Siswa();
+    siswa.id = item['id'];
+    siswa.nama = item['nama'];
+
+    Siswas.add(siswa);
+  }
+
+  return Siswas;
+}
+
+
+Future<List<Siswa>> fetchDataSiswabyName(String query) async {
+  List<Siswa> Siswas = [];
+
+  String apiURL = "${Urldata.Url}/siswas/show/all/$query";
   var result = await http.get(Uri.parse(apiURL));
   var dataJson = json.decode(result.body);
 
@@ -30,7 +51,7 @@ class Siswa {
 
 Future<Siswa> fetchDataSiswa(int id) async {
 
-  String apiURL = "http://localhost:3000/siswas/show/$id";
+  String apiURL = "${Urldata.Url}/siswas/show/$id";
   var result = await http.get(Uri.parse(apiURL));
   var dataJson = json.decode(result.body)['data'];
 
@@ -38,6 +59,7 @@ Future<Siswa> fetchDataSiswa(int id) async {
 
     siswa.id = dataJson['siswa']['id'];
     siswa.nama = dataJson['siswa']['nama'];
+    siswa.nama_kelas = dataJson['siswa']['Kela']['namaKelas'];
 
     List<Record_Pelanggaran> records = [];
     for (var item2 in dataJson['pelanggaran']){

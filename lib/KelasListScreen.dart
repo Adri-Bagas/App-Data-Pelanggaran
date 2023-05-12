@@ -11,6 +11,9 @@ class KelasListScreen extends StatefulWidget {
 }
 
 class _KelasListScreenState extends State<KelasListScreen> {
+
+  int jum_kelas = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +95,7 @@ class _KelasListScreenState extends State<KelasListScreen> {
                     ]),
                 child: Center(
                   child: Text(
-                    '0',
+                    '$jum_kelas',
                     style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
@@ -118,6 +121,7 @@ class _KelasListScreenState extends State<KelasListScreen> {
                     future: fetchDataKelasWithSiswaAll(),
                     builder: (context, snapshot) {
                       if(snapshot.hasData){
+                          jum_kelas = snapshot.data!.length;
                         return ListView.builder(
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index){
@@ -147,28 +151,7 @@ class _KelasListScreenState extends State<KelasListScreen> {
                         return Center(child: CircularProgressIndicator());
                       }
                     },
-                  )
-                // ListView.builder(
-                //   itemCount: kelas.Siswas.length,
-                //   itemBuilder: (context, index) {
-                //     Siswa siswa = kelas.Siswas[index];
-                //     return GestureDetector(
-                //       onTap: () {
-                //         Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => SiswaDetailScreen(siswa: siswa),
-                //           ),
-                //         );
-                //       },
-                //       child: ListTile(
-                //         title: Text(siswa.nama),
-                //         subtitle: const Text('Keterangan'),
-                //         trailing: const Icon(Icons.more_vert),
-                //       ),
-                //     );
-                //   },
-                // ),
+                  ),
               ),
             ],
           ),
